@@ -1,7 +1,9 @@
 <nav>
-	<a href="/"><strong>Intro Algorithms Svelte App</strong></a>
+	<a href="/"><strong>Intro To Algorithms</strong></a>
 	<div>
-		<a href="/binary-search">Binary Search</a>
+		<a href="/binary-search">binary search</a> |
+		<a href="/recursion">recursion</a> |
+		<a href="/selection-sort">selection sort</a>
 	</div>
 </nav>
 
