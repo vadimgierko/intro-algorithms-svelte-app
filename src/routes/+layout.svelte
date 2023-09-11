@@ -1,9 +1,11 @@
 <nav>
-	<a href="/"><strong>Intro To Algorithms</strong></a>
+	<div style="margin-right:0.5em"><a href="/"><strong>Intro To Algorithms</strong></a></div>
+
 	<div>
 		<a href="/binary-search">binary search</a> |
 		<a href="/recursion">recursion</a> |
-		<a href="/selection-sort">selection sort</a>
+		<a href="/selection-sort">selection sort</a> |
+		<a href="/insertion-sort">insertion sort</a>
 	</div>
 </nav>
 
