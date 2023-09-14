@@ -5,7 +5,8 @@
 		<a href="/binary-search">binary search</a> |
 		<a href="/recursion">recursion</a> |
 		<a href="/selection-sort">selection sort</a> |
-		<a href="/insertion-sort">insertion sort</a>
+		<a href="/insertion-sort">insertion sort</a> |
+		<a href="/quick-sort">quick sort</a>
 	</div>
 </nav>
 
