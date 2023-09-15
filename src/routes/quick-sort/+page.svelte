@@ -1,12 +1,18 @@
 <script>
+	import StepsContainer from './StepsContainer.svelte';
+
 	const arrayToSort = [22, 11, 66, 99, 88, 9, 7, 42];
 
-	const steps = []; // for displaying sort steps
+	// for displaying sort steps list:
+	const steps = [];
+	const stepsForRandomIndexPivot = [];
 
-	function quickSort(array) {
-		console.log('quick sorting...');
+	function quickSort({ array = [], randomPivot = true }) {
+		// if we use random index for pivot,
+		// it may make the algorithm more efficient in case of iterations/complexity:
+		const index = randomPivot ? Math.floor(Math.random() * array.length) : 0;
+		const pivot = array[index];
 
-		const pivot = array[0];
 		let leftArray = [];
 		let rightArray = [];
 
@@ -14,7 +20,7 @@
 
 		for (let i = 1; i < array.length; i++) {
 			const element = array[i];
-			console.log({ element });
+
 			if (element < pivot) {
 				leftArray.push(element);
 			} else if (element > pivot) {
@@ -22,12 +28,23 @@
 			}
 		}
 
-		steps.push({ array, left: leftArray, pivot, right: rightArray });
+		if (randomPivot) {
+			stepsForRandomIndexPivot.push({ array, left: leftArray, pivot, right: rightArray });
+		} else {
+			steps.push({ array, left: leftArray, pivot, right: rightArray });
+		}
 
-		return [...quickSort(leftArray), pivot, ...quickSort(rightArray)];
+		console.log(leftArray, pivot, rightArray);
+
+		return [
+			...quickSort({ array: leftArray, randomPivot }),
+			pivot,
+			...quickSort({ array: rightArray, randomPivot })
+		];
 	}
 
-	const sortedArray = quickSort(arrayToSort);
+	const sortedArray = quickSort({ array: arrayToSort, randomPivot: false });
+	const sortedArrayWithRandomPivot = quickSort({ array: arrayToSort }); // this needed to populate steps
 
 	//============================ CODE ===================================//
 
@@ -35,7 +52,11 @@
 const arrayToSort = [22, 11, 66, 99, 88, 9, 7, 42];
 
 function quickSort(array) {
+	// if we use random index for pivot,
+	// it may make the algorithm more efficient in case of iterations/complexity:
+	const index = Math.floor(Math.random() * array.length); // usually pivot is the first element, so index = 0;
 	const pivot = array[0];
+ 
 	let leftArray = [];
 	let rightArray = [];
 
@@ -53,8 +74,6 @@ function quickSort(array) {
 
 	return [...quickSort(leftArray), pivot, ...quickSort(rightArray)]
 }
-
-const sortedArray = quickSort(arrayToSort);
  `;
 </script>
 
@@ -66,8 +85,12 @@ const sortedArray = quickSort(arrayToSort);
 	Quick sort is a divide-and-conquer algorithm that sorts an array by choosing a pivot element and
 	partitioning the array into two subarrays, one containing elements smaller than the pivot, and the
 	other containing elements larger than the pivot. The two subarrays are then recursively sorted
-	until the entire array is sorted. The pivot is usually selected as the first or last element of
-	the array.
+	until the entire array is sorted.
+</p>
+<p>
+	The <strong>pivot</strong> is usually selected as the <strong>first or last element</strong> of
+	the array, but if we use <u><strong>random index</strong></u> for pivot, it may make the algorithm
+	more efficient in case of iterations/ complexity.
 </p>
 
 <h2>Implementation of the quick sort algorithm</h2>
@@ -77,16 +100,7 @@ const sortedArray = quickSort(arrayToSort);
 <p>Array to sort: {arrayToSort}</p>
 <p>Sorted array: {sortedArray}</p>
 
-<p>Steps:</p>
-<ol>
-	{#each steps as { array, left, pivot, right }}
-		<li>
-			array: {array};
-			<br />
-			left: {left}, pivot: {pivot}, right: {right}
-		</li>
-	{/each}
-</ol>
+<StepsContainer {steps} {stepsForRandomIndexPivot} />
 
 <h2>Algorithm Code</h2>
 
@@ -98,9 +112,5 @@ const sortedArray = quickSort(arrayToSort);
 	h1,
 	h2 {
 		text-align: center;
-	}
-
-	pre {
-		overflow: auto;
 	}
 </style>
