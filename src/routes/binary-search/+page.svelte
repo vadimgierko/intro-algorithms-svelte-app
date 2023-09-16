@@ -1,4 +1,6 @@
 <script>
+	import Page from '$lib/Page.svelte';
+
 	const MIN = 1;
 	const MAX = 100;
 
@@ -79,70 +81,45 @@ function guessTheNumber(min = MIN, max = MAX) {
 	`;
 </script>
 
-<h1>Algorithm: Binary Search</h1>
-
-<hr />
-
-<p>
-	Binary search is an efficient algorithm for <strong
-		>finding an item from a sorted list of items</strong
-	>. It works by repeatedly <strong>dividing in half the portion of the list</strong> that could contain
-	the item, until you've narrowed down the possible locations to just one.
-</p>
-
-<p>
-	Binary search is more efficient than js method <code>.find()</code>, because <code>.find()</code> will
-	iterate on every element of an array, which is not efficient on large sets.
-</p>
-
-<h2>Implementation: Guessing Numbers Game</h2>
-
-<hr />
-
-<label for="number-input">Choose the number from 1 to 100 & I will guess it in max. 7 steps!</label>
-<br />
-<input
-	name="number-input"
-	type="number"
-	min={MIN}
-	max={MAX}
-	bind:value={inputedNumber}
-	placeholder="choose number"
-/>
-
-<button on:click={() => guessTheNumber()}>guess</button>
-
-{#if guesses.length}
-	<p>Guesses:</p>
-	<ol>
-		{#each guesses as guess, i}
-			<li key={'guess-' + i} class={i === guesses.length - 1 ? 'guess' : ''}>{guess}</li>
-		{/each}
-	</ol>
-{/if}
-
-<h2>Algorithm code</h2>
-
-<hr />
-
-<pre>
+<Page
+	algorithmName="Binary Search"
 	{code}
-</pre>
+	description={[
+		`Binary search is an efficient algorithm for <strong>finding an item from a sorted list of items</strong>. It works by repeatedly <strong>dividing in half the portion of the list</strong> that could contain the item, until you've narrowed down the possible locations to just one.`,
+		`	Binary search is more efficient than js method <code>.find()</code>, because <code>.find()</code> will iterate on every element of an array, which is not efficient on large sets.`
+	]}
+	implementationTitle="Guessing Numbers Game"
+>
+	<label for="number-input"
+		>Choose the number from 1 to 100 & I will guess it in max. 7 steps!</label
+	>
+	<br />
+	<input
+		name="number-input"
+		type="number"
+		min={MIN}
+		max={MAX}
+		bind:value={inputedNumber}
+		placeholder="choose number"
+	/>
+
+	<button on:click={() => guessTheNumber()}>guess</button>
+
+	{#if guesses.length}
+		<p>Guesses:</p>
+		<ol>
+			{#each guesses as guess, i}
+				<li key={'guess-' + i} class={i === guesses.length - 1 ? 'guess' : ''}>{guess}</li>
+			{/each}
+		</ol>
+	{/if}
+</Page>
 
 <style>
-	h1,
-	h2 {
-		text-align: center;
-	}
-
 	input {
 		width: 8em;
 		background-color: rgb(59, 59, 59);
 		color: rgb(245, 241, 241);
-	}
-
-	pre {
-		overflow: auto;
 	}
 
 	.guess {
