@@ -1,4 +1,6 @@
 <script>
+	import Page from '$lib/Page.svelte';
+
 	const arrayToSort = [22, 11, 66, 99, 88, 9, 7, 42];
 
 	function insert(array, rightIndex, value) {
@@ -83,44 +85,20 @@ const sortedArray = sort(arrayToSort);
   `;
 </script>
 
-<h1>Algorithm: Insertion Sort</h1>
-
-<hr />
-
-<p>
-	Loop over positions in the array, starting with index 1. Each new position is like the new card
-	handed to you by the dealer, and you need to insert it into the correct place in the sorted
-	subarray to the left of that position.
-</p>
-
-<h2>Implementation: sorting an array</h2>
-
-<hr />
-
-<p>Array to sort: {arrayToSort}</p>
-<p>Sorted array: {sortedArray}</p>
-
-<p>sort step by step:</p>
-<p>
-	{sortedArrayStepByStep}
-	<button on:click={() => sortStepByStep()}>sort step by step ({step})</button>
-</p>
-
-<h2>Algorithm code</h2>
-
-<hr />
-
-<pre>
+<Page
+	algorithmName="Insertion Sort"
 	{code}
-</pre>
+	description={[
+		`Loop over positions in the array, starting with index 1. Each new position is like the new card handed to you by the dealer, and you need to insert it into the correct place in the sorted subarray to the left of that position.`
+	]}
+	implementationTitle="sorting an array"
+>
+	<p>Array to sort: {arrayToSort}</p>
+	<p>Sorted array: {sortedArray}</p>
 
-<style>
-	h1,
-	h2 {
-		text-align: center;
-	}
-
-	pre {
-		overflow: auto;
-	}
-</style>
+	<p>sort step by step:</p>
+	<p>
+		{sortedArrayStepByStep}
+		<button on:click={() => sortStepByStep()}>sort step by step ({step})</button>
+	</p>
+</Page>

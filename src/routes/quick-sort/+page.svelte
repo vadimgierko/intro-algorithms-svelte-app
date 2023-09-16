@@ -1,4 +1,5 @@
 <script>
+	import Page from '$lib/Page.svelte';
 	import StepsContainer from './StepsContainer.svelte';
 
 	const arrayToSort = [22, 11, 66, 99, 88, 9, 7, 42];
@@ -77,40 +78,17 @@ function quickSort(array) {
  `;
 </script>
 
-<h1>Algorithm: Quick Sort</h1>
+<Page
+	algorithmName="Quick Sort"
+	{code}
+	description={[
+		'Quick sort is a divide-and-conquer algorithm that sorts an array by choosing a pivot element and partitioning the array into two subarrays, one containing elements smaller than the pivot, and the other containing elements larger than the pivot. The two subarrays are then recursively sorted until the entire array is sorted.',
+		`The <strong>pivot</strong> is usually selected as the <strong>first or last element</strong> of the array, but if we use <u><strong>random index</strong></u> for pivot, it may make the algorithm more efficient in case of iterations/ complexity.`
+	]}
+	implementationTitle="sorting an array"
+>
+	<p>Array to sort: {arrayToSort}</p>
+	<p>Sorted array: {sortedArray}</p>
 
-<hr />
-
-<p>
-	Quick sort is a divide-and-conquer algorithm that sorts an array by choosing a pivot element and
-	partitioning the array into two subarrays, one containing elements smaller than the pivot, and the
-	other containing elements larger than the pivot. The two subarrays are then recursively sorted
-	until the entire array is sorted.
-</p>
-<p>
-	The <strong>pivot</strong> is usually selected as the <strong>first or last element</strong> of
-	the array, but if we use <u><strong>random index</strong></u> for pivot, it may make the algorithm
-	more efficient in case of iterations/ complexity.
-</p>
-
-<h2>Implementation of the quick sort algorithm</h2>
-
-<hr />
-
-<p>Array to sort: {arrayToSort}</p>
-<p>Sorted array: {sortedArray}</p>
-
-<StepsContainer {steps} {stepsForRandomIndexPivot} />
-
-<h2>Algorithm Code</h2>
-
-<hr />
-
-<pre>{code}</pre>
-
-<style>
-	h1,
-	h2 {
-		text-align: center;
-	}
-</style>
+	<StepsContainer {steps} {stepsForRandomIndexPivot} />
+</Page>
